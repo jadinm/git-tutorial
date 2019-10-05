@@ -1,0 +1,9 @@
+digraph "git history" {
+    node [shape="box", style="rounded,filled", color="skyblue4", fillcolor="slategray1"];
+	"master" [color="indianred4", fillcolor="lightpink", label="master"];
+	"master" -> "80507e3";
+	"HEAD" [color="lightgoldenrod3", fillcolor="khaki1", label="HEAD"];
+	"HEAD" -> "master";
+
+	"80507e3" [label="80507e3\nInitial commit"];
+}

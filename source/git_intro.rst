@@ -1,5 +1,8 @@
 .. -*- coding: utf-8 -*-
-.. Copyright |copy| 2013 by Benoit Legat
+.. Copyright |copy| 2019 by Benoit Legat et Mathieu Jadin
+.. Ce fichier est dérivé de `Outils Git
+    <https://github.com/obonaventure/SystemesInformatiques/blob/master/Outils/git.rst>`_
+   by Benoit Legat, used under `creative commons <http://creativecommons.org/licenses/by-sa/3.0/>`_
 .. Ce fichier est distribué sous une licence `creative commons <http://creativecommons.org/licenses/by-sa/3.0/>`_
 
 
@@ -13,15 +16,27 @@ On l'utilise le plus souvent à l'aide de l'utilitaire `git(1)`_ mais il
 existe aussi des
 `applications graphiques <http://git-scm.com/downloads/guis>`_.
 
-Les différentes versions sont enregistrées dans des commits qui sont liées
-au commit constituant la version précédente.
+Les différentes versions des fichiers sont enregistrées dans des commits.
+Chaque commit est lié aux commits précédents
+qui consituent la version précédente comme dans l'image ci-dessous.
 On sait ainsi facilement voir ce qui a changé entre deux versions
 (pas spécialement, une version et la suivante)
 et même restaurer l'état de certains fichiers à une version sauvegardée
 dans un commit.
+
+.. figure:: figures/neato/git_snapshots.svg
+   :align: center
+
+   L'historique Git
+
+Dans cet exemple, lors du premier commit, un Makefile et
+les fichiers main.c et main.h ont été ajoutés.
+Le deuxième commit a rajouté le fichier print.c
+et modifié les autres fichiers à l'exception de main.c.
+Ce dernier est modifié dans le dernier commit.
 Du coup, si vous utilisez `Git`_ pour un projet, vous ne pouvez jamais
-perdre plus que les changements que vous n'avez pas encore committé.
-Toutes les versions du codes déjà committées sont sauvegardées et facilement
+perdre plus que les changements que vous n'avez pas encore commit.
+Toutes les versions du codes déjà commit sont sauvegardées et facilement
 accessibles.
 Cette garantie est extrêmement précieuse et constitue à elle seule une raison
 suffisante d'utiliser `Git`_ pour tous vos projets.
@@ -47,10 +62,3 @@ leur origine est évidente quand on sait qu'il a été créé pour gérer des pr
 aussi complexes que le kernel Linux.
 Il est parfois critiqué pour sa complexité mais c'est surtout dû au fait
 qu'il a une façon assez différente de fonctionner des autres.
-
-.. FIXME je dis "historique" ou "arborescence" ? sur le wikipedia
-   français, ils disent "arborescence :/ (http://fr.wikipedia.org/wiki/Git)
-   Pour svn, historique est le bon terme mais pour Git...
-   Je dis "dépôt" ou "repository" ?
-
-

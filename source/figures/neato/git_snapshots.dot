@@ -1,0 +1,31 @@
+digraph {
+    node [shape="box" style="rounded,filled" fillcolor="white"];
+
+    timeline1 [shape="point" style="" pos="0,4.5!"];
+    timeline2 [shape="plaintext" style="" pos="5,4.5!" label="temps"];
+
+    version1 [color="skyblue4", fillcolor="slategray1", label="Version 1", pos="0,4!"];
+    version2 [color="skyblue4", fillcolor="slategray1", label="Version 2", pos="2,4!"];
+    version3 [color="skyblue4", fillcolor="slategray1", label="Version 3", pos="4,4!"];
+
+    Makefile1 [label="Makefile" pos="0,3!"];
+    Makefile2 [label="Makefile" pos="2,3!"];
+    Makefile3 [color="gray" style="dashed,rounded,filled" label="Makefile" pos="4,3!"];
+
+    mainc1 [label="main.c" pos="0,2!"];
+    mainc2 [color="gray" style="dashed,rounded,filled" label="main.c" pos="2,2!"];
+    mainc3 [label="main.c" pos="4,2!"];
+
+    mainh1 [label="main.h" pos="0,1!"];
+    mainh2 [label="main.h" pos="2,1!"];
+    mainh3 [color="gray" style="dashed,rounded,filled" label="main.h" pos="4,1!"];
+
+    printc2 [label="print.c" pos="2,0!"];
+    printc3 [color="gray" style="dashed,rounded,filled" label="print.c" pos="4,0!"];
+
+    timeline1 -> timeline2;
+    version1 -> version2 -> version3;
+    version1 -> Makefile1 -> mainc1 -> mainh1;
+    version2 -> Makefile2 -> mainc2 -> mainh2 -> printc2;
+    version3 -> Makefile3 -> mainc3 -> mainh3 -> printc3;
+}

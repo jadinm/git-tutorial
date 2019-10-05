@@ -1,0 +1,18 @@
+digraph "git history" {
+    node [shape="box", style="rounded,filled", color="skyblue4", fillcolor="slategray1"];
+	"master" [color="indianred4", fillcolor="lightpink", label="master"];
+	"master" -> "73c6a3a";
+	"HEAD" [color="lightgoldenrod3", fillcolor="khaki1", label="HEAD"];
+	"HEAD" -> "master";
+
+	"origin/master" [color="indianred4", fillcolor="lightpink", label="origin/master"];
+	"origin/master" -> "205842a";
+	"origin" [color="lightgoldenrod3", fillcolor="khaki1", label="origin"];
+	"origin" -> "origin/master";
+
+	"80507e3" [label="80507e3\nInitial commit"];
+	"205842a" [label="205842a\nAdd a return statement"];
+	"205842a" -> "80507e3";
+	"73c6a3a" [label="73c6a3a\nAdd missing return statement"];
+	"73c6a3a" -> "80507e3";
+}

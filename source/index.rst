@@ -1,7 +1,3 @@
-.. Git documentation master file, created by
-   sphinx-quickstart on Sun Apr  7 18:37:06 2019.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
 
 ====================
 Tutoriel Git
@@ -12,10 +8,11 @@ Tutoriel Git
 
    git_intro.rst
    git_linear.rst
-   git_non_linear.rst
-   git_commands.rst
+   git_ignore.rst
    git_branching.rst
-   git_other_commands.rst
+   git_change_history.rst
+   git_stash.rst
    git_fix_bugs.rst
-   subversion.rst
 
+.. TODO Add section on rebase (maybe inside the section for Pull Requests)
+.. TODO Add section on tags

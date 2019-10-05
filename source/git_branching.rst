@@ -1,7 +1,11 @@
 .. -*- coding: utf-8 -*-
-.. Copyright |copy| 2013 by Benoit Legat
+.. Copyright |copy| 2019 by Benoit Legat et Mathieu Jadin
+.. Ce fichier est dérivé de `Outils Git
+    <https://github.com/obonaventure/SystemesInformatiques/blob/master/Outils/git.rst>`_
+   by Benoit Legat, used under `creative commons <http://creativecommons.org/licenses/by-sa/3.0/>`_
 .. Ce fichier est distribué sous une licence `creative commons <http://creativecommons.org/licenses/by-sa/3.0/>`_
 
+.. _non_linear_history:
 
 Branching
 ~~~~~~~~~
@@ -27,6 +31,26 @@ L'un travaille sur une fonctionnalité, l'autre sur une autre.
 À la base, le code sans ces deux fonctionnalités marchait mais comme
 vous êtes en train d'en implémenter une nouvelle chacun, le code ne marche
 chez aucun des deux développeurs.
+
+`Git`_ peut créer un historique non-linéaire semblable à celui ci-dessous.
+C'est un exemple un peu exagéré de non-linéarité mais il est
+pédagogiquement intéressant.
+
+Cet historique forme un graphe orienté,
+c'est à dire que les arêtes ont une direction.
+
+Les noeuds sont de 3 types.
+
+- en bleu, on a les commits;
+- en rouge, on a les branches, le nom est un peu trompeur car
+  c'est juste un pointeur vers un commit;
+- en jaune, on a ``HEAD``, c'est un pointeur vers la branche active.
+
+.. figure:: figures/graph.svg
+   :align: center
+
+   Exemple d'historique avec plusieurs branches
+
 
 Créer une branche
 #################
@@ -62,7 +86,7 @@ pas quand on committait car ce n'était pas la branche active.
 L'historique ressemble maintenant à la figure suivante.
 On voit que `git-branch(1)`_ ne modifie pas la branche active.
 
-.. figure:: figures/hello_branches.png
+.. figure:: figures/hello_branches.svg
    :align: center
 
    Historique après la création de ``pid`` et ``universal`` et
@@ -86,7 +110,7 @@ dans ``master``. On obtient alors la figure suivante
    [master c1f2163] Add intro
     1 file changed, 4 insertions(+)
 
-.. figure:: figures/hello_intro.png
+.. figure:: figures/hello_intro.svg
    :align: center
 
    Historique après avoir ajouté un commentaire d'introduction
@@ -177,40 +201,40 @@ Par "modification", j'entends, les modifications faites depuis le premier
 commit parent commun entre les deux commits en question.
 Deux cas peuvent se présenter
 
- - soit ce commit parent est le commit référencé par la branche active,
-   dans lequel cas, on dira que la fusion est *fast-forward*.
-   `Git`_ fera alors simplement la branche active pointer vers le commit
-   référencé par la branche qu'on veut fusionner;
- - soit ce commit parent est le commit référencé par la branche qu'on veut
-   fusionner, dans lequel cas, `Git`_ ne fera rien car le commit référencé
-   par la branche active contient déjà les modifications de l'autre puisque
-   c'est un de ses commits parents;
- - soit ce commit est différent des deux commits en question.
-   Dans ce cas, `Git`_ créera un commit ayant deux parents, les deux commits
-   en questions et tentera de fusionner toutes les modifications depuis
-   le commit parent commun.
-   Bien entendu, plus ce commit commun est loin, plus il y aura de modification
-   et plus ce sera difficile.
-   C'est pourquoi on conseille de souvent fusionner la branche principale
-   pour éviter que la fusion de la *feature branch* soit trop compliquée
-   lorsque la fonctionnalité sera terminée.
+- soit ce commit parent est le commit référencé par la branche active,
+  dans lequel cas, on dira que la fusion est *fast-forward*.
+  `Git`_ fera alors simplement la branche active pointer vers le commit
+  référencé par la branche qu'on veut fusionner;
+- soit ce commit parent est le commit référencé par la branche qu'on veut
+  fusionner, dans lequel cas, `Git`_ ne fera rien car le commit référencé
+  par la branche active contient déjà les modifications de l'autre puisque
+  c'est un de ses commits parents;
+- soit ce commit est différent des deux commits en question.
+  Dans ce cas, `Git`_ créera un commit ayant deux parents, les deux commits
+  en questions et tentera de fusionner toutes les modifications depuis
+  le commit parent commun.
+  Bien entendu, plus ce commit commun est loin, plus il y aura de modification
+  et plus ce sera difficile.
+  C'est pourquoi on conseille de souvent fusionner la branche principale
+  pour éviter que la fusion de la *feature branch* soit trop compliquée
+  lorsque la fonctionnalité sera terminée.
 
-   Là encore, il y a deux cas
+  Là encore, il y a deux cas
 
-    - soit `Git`_ arrive à tout fusionner, c'est à dire que les modifications
-      sont soit dans des fichiers différents, soit à des endroits bien
-      distincts d'un même fichier;
-    - soit il n'y arrive pas. Il fusionnera alors le plus possible lui-même
-      et marquera dans le fichier les confits à gérer à la main.
-      Il faudra alors ouvrir le fichier et régler puis avertir à `Git`_
-      qu'il peut terminer la fusion.
-      En peut aussi dire qu'on abandonne la fusion et `Git`_ retire tout
-      ce qu'il a fait pour la fusion.
+  - soit `Git`_ arrive à tout fusionner, c'est à dire que les modifications
+    sont soit dans des fichiers différents, soit à des endroits bien
+    distincts d'un même fichier;
+  - soit il n'y arrive pas. Il fusionnera alors le plus possible lui-même
+    et marquera dans le fichier les confits à gérer à la main.
+    Il faudra alors ouvrir le fichier et régler puis avertir à `Git`_
+    qu'il peut terminer la fusion.
+    En peut aussi dire qu'on abandonne la fusion et `Git`_ retire tout
+    ce qu'il a fait pour la fusion.
 
-   Dans les deux cas, si on abandonne pas, `Git`_ créera ce commit
-   de fusion et fera pointer la branche active vers ce dernier.
+  Dans les deux cas, si on abandonne pas, `Git`_ créera ce commit
+  de fusion et fera pointer la branche active vers ce dernier.
 
-Il est important de réinsister sur le fait que
+Il est important de ré-insister sur le fait que
 la branche non-active n'a pas été modifiée par la fusion.
 Par contre si on la rend active et
 qu'on demande de la fusionner avec l'ancienne branche active,
@@ -244,7 +268,7 @@ de ``master`` avec une fusion *fast-forward*.
 
 On a alors la figure suivante
 
-.. figure:: figures/hello_2ff.png
+.. figure:: figures/hello_2ff.svg
    :align: center
 
    Historique après avoir mis ``pid`` et ``universal`` à jour
@@ -289,7 +313,7 @@ Mettons tous les changements des fichiers traqués avec ``-a``
 
 Ce qui donne l'historique suivant
 
-.. figure:: figures/hello_make_universal.png
+.. figure:: figures/hello_make_universal.svg
    :align: center
 
    Historique après avoir committé ``Make it universal``
@@ -329,7 +353,7 @@ Committons cela
     1 file changed, 5 insertions(+)
     create mode 100644 Makefile
 
-.. figure:: figures/hello_makefile.png
+.. figure:: figures/hello_makefile.svg
    :align: center
 
    Historique après avoir committé ``Add Makefile``
@@ -352,7 +376,7 @@ On voit que `Git`_ a su faire la fusion sans notre aide sans problème
 car tous les changements étaient dans le ``Makefile`` qui n'existait pas
 pour ``universal``
 
-.. figure:: figures/hello_universal_makefile.png
+.. figure:: figures/hello_universal_makefile.svg
    :align: center
 
    Historique après avoir fusionné ``master`` dans ``universal``
@@ -370,7 +394,7 @@ pour ``universal``
 
 `Git`_ nous confirme que c'est *fast-forward*
 
-.. figure:: figures/hello_pid_makefile.png
+.. figure:: figures/hello_pid_makefile.svg
    :align: center
 
    Historique après avoir fusionné ``master`` dans ``pid``
@@ -406,7 +430,7 @@ et committons la
    [pid eda36d7] Add pid/ppid info
     1 file changed, 2 insertions(+)
 
-.. figure:: figures/hello_ppid.png
+.. figure:: figures/hello_ppid.svg
    :align: center
 
    Historique après avoir implémenté ``pid``
@@ -426,7 +450,7 @@ en a plus besoin
    $ git branch -d pid
    Deleted branch pid (was eda36d7).
 
-.. figure:: figures/hello_dpid.png
+.. figure:: figures/hello_dpid.svg
    :align: center
 
    Historique après avoir fusionné et supprimé ``pid``
@@ -479,7 +503,7 @@ avant d'essayer accéder au deuxième élément.
    [universal 6fd2e9b] Fix SIGSEV without args
     1 file changed, 1 insertion(+), 1 deletion(-)
 
-.. figure:: figures/hello_fix.png
+.. figure:: figures/hello_fix.svg
    :align: center
 
    Historique après avoir réparé le ``Segmentation fault``
@@ -575,7 +599,7 @@ Il n'y a pas besoin de spécifier de commentaire pour une fusion car
    $ git commit -a
    [master 0dd6cd7] Merge branch 'universal'
 
-.. figure:: figures/hello_merge_universal.png
+.. figure:: figures/hello_merge_universal.svg
    :align: center
 
    Historique après avoir fusionné la branche ``universal``

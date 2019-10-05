@@ -1,0 +1,12 @@
+digraph {
+    node [shape="box" style="rounded,filled" fillcolor="white"];
+
+    untracked [label="Non tracké"];
+    modified [label="Modifié"];
+    staged [label="Staged"];
+    committed [label="Committed"];
+
+    untracked -> staged [dir=forward, labeldistance=4.5, labelangle=40, headlabel="git add"];
+    modified -> staged [dir=backward, labeldistance=4.5, labelangle=-40, headlabel="git add"];
+    staged -> committed [labeldistance=4.5, labelangle=65, headlabel="git commit"];
+}

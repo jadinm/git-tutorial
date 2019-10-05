@@ -9,8 +9,6 @@ digraph "git history" {
   "hi" -> "4cd75";
   "ho" [shape="box",style="rounded,filled",color="indianred4", fillcolor="lightpink", label="ho"];
   "ho" -> "22931";
-  "v0.1" [shape="box",style="rounded,filled",color="seagreen", fillcolor="palegreen", label="v0.1"];
-  "v0.1" -> "245e4";
   "HEAD" [shape="box",style="rounded,filled",color="lightgoldenrod3", fillcolor="khaki1", label="HEAD"];
   "HEAD" -> "master";
   "22931" [shape="box",style="rounded,filled",color="skyblue4", fillcolor="slategray1", label="22931\ng"];
