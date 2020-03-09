@@ -87,7 +87,11 @@ html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {
+        'navbar_links': [
+            ("{% if logged_in is not none %}Log out ({{ logged_in['username'] }}){% else %}Log in{% endif %}", "{% if logged_in is not none %}/logout{% else %}/login{% endif %}", True),
+        ]
+}
 
 html_title='Tutoriel Git'
 
